@@ -1,0 +1,25 @@
+AZEZ LAB AI V14 — LABORATORY KNOWLEDGE SYSTEM
+
+IMPLEMENTED
+- Versioned governed laboratory knowledge catalog foundation
+- 8 laboratory disciplines
+- 31 initial test definitions
+- Test aliases and canonical-code resolution
+- Specimen context metadata
+- Governed unit lists
+- Explicit per-test unit conversion rules
+- Conversion provenance via knowledge version
+- Reference-set context resolver foundation
+- Reference contexts: sex, age bounds, specimen, fasting
+- Only APPROVED reference sets are resolvable
+- Critical-value policy foundation
+- Organization-aware critical policy evaluation
+- Knowledge change proposal/review workflow
+- Prisma governance models for reference sets, critical policies, and knowledge change proposals
+- Knowledge API
+- Product OS knowledge registry status card
+
+IMPORTANT
+The included catalog is a development foundation, not a complete clinical knowledge base.
+Reference intervals and critical values are NOT pre-populated as universal medical truth.
+They must be governed, sourced, reviewed, approved, and where appropriate configured for the laboratory, method, analyzer, population, and intended market.

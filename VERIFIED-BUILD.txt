@@ -1,0 +1,19 @@
+AZEZ LAB AI V17 — VERIFIED SOURCE BUILD
+
+Corrections applied after full source inspection:
+- Fixed JSX syntax errors in Landing.jsx.
+- Fixed invalid JSX numeric attributes in the 3D World component.
+- Fixed Product OS runtime scope/prop errors for AI provider, knowledge registry, integration gateway and review controls.
+- Fixed authenticated case analysis/orchestration calls.
+- Fixed tenant resolution for memory and PostgreSQL case records.
+- Updated outdated OCR wording in the import dialog.
+
+Verification completed:
+- All frontend JSX files parsed successfully.
+- All server JavaScript files passed node --check.
+- Document parser self-test passed.
+- Laboratory knowledge self-test passed.
+- Tenant isolation self-test passed.
+- Validation metrics self-test passed.
+
+A complete live run still requires npm dependencies to finish installing on the target computer.

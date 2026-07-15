@@ -1,0 +1,24 @@
+AZEZ LAB AI V15 — SECURITY, IDENTITY & TENANT ISOLATION
+
+IMPLEMENTED
+- Tenant authorization policy primitive
+- Cross-tenant deny-by-default behavior
+- System-admin explicit bypass
+- Tenant scope helper
+- Argon2id password hashing foundation
+- Minimum 12-character password policy primitive
+- Session creation, expiration and revocation foundation
+- Revoke-all-user-sessions primitive
+- Persistent AuthSession Prisma model
+- SecurityEvent Prisma model
+- File pre-scan boundary
+- Executable/script extension blocking
+- Empty-file rejection
+- Explicit external malware scanner status
+- Tenant guard added to case-specific governed AI route
+- Tenant isolation self-test
+
+IMPORTANT
+The in-memory session store is a development foundation. Production auth sessions should use the persistent AuthSession model and hashed opaque tokens.
+An external malware scanning engine is not bundled; V15 exposes the boundary and does not falsely claim malware scanning is active.
+MFA/enterprise identity provider integration remains deployment-specific.

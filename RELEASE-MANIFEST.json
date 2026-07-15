@@ -1,0 +1,35 @@
+{
+  "product": "AZEZ LAB AI",
+  "release": "V17-DEPLOYMENT-CANDIDATE",
+  "version": "1.0.0-rc17",
+  "builtOn": "2026-07-14",
+  "launch": "START-AZEZ-LAB-AI.bat",
+  "stop": "STOP-AZEZ-LAB-AI.bat",
+  "backup": "BACKUP-AZEZ-LAB-AI.bat",
+  "restore": "RESTORE-AZEZ-LAB-AI.bat",
+  "capabilities": {
+    "3d_product_experience": true,
+    "laboratory_product_os": true,
+    "csv_xlsx_ingestion": true,
+    "image_ocr": true,
+    "text_pdf_extraction": true,
+    "scanned_multipage_pdf_full_ocr": false,
+    "evidence_provenance": true,
+    "verification_gate": true,
+    "pattern_engine": true,
+    "governed_ai_provider_adapter": true,
+    "knowledge_registry": true,
+    "tenant_policy_foundation": true,
+    "postgres_redis_worker_foundation": true,
+    "hl7_fhir_foundation": true,
+    "engineering_validation": true
+  },
+  "clinicalStatus": "ENGINEERING DEPLOYMENT CANDIDATE \u2014 NOT A CERTIFIED MEDICAL DEVICE",
+  "knownBoundaries": [
+    "Scanned multi-page PDFs still require a page-rendering OCR worker for robust per-page OCR.",
+    "External malware scanning is not bundled.",
+    "Production identity/MFA/IdP integration is deployment-specific.",
+    "Clinical efficacy and regulatory approval are not established by engineering tests.",
+    "Reference intervals and critical-value policies require governed laboratory configuration."
+  ]
+}

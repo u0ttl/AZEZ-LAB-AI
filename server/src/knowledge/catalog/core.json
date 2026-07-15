@@ -1,0 +1,581 @@
+{
+  "version": "AZEZ-LAB-KNOWLEDGE-2026.07-V1",
+  "status": "DEVELOPMENT_REVIEW_REQUIRED",
+  "disciplines": [
+    {
+      "code": "HEM",
+      "name": "Hematology"
+    },
+    {
+      "code": "CHEM",
+      "name": "Clinical Chemistry"
+    },
+    {
+      "code": "COAG",
+      "name": "Coagulation"
+    },
+    {
+      "code": "IMM",
+      "name": "Immunology"
+    },
+    {
+      "code": "ENDO",
+      "name": "Endocrinology"
+    },
+    {
+      "code": "RENAL",
+      "name": "Renal"
+    },
+    {
+      "code": "HEP",
+      "name": "Hepatic"
+    },
+    {
+      "code": "CARD",
+      "name": "Cardiac Biomarkers"
+    }
+  ],
+  "tests": [
+    {
+      "code": "HGB",
+      "name": "Hemoglobin",
+      "discipline": "HEM",
+      "specimens": [
+        "WHOLE_BLOOD"
+      ],
+      "aliases": [
+        "HB",
+        "HEMOGLOBIN"
+      ],
+      "units": [
+        "g/dL",
+        "g/L"
+      ]
+    },
+    {
+      "code": "HCT",
+      "name": "Hematocrit",
+      "discipline": "HEM",
+      "specimens": [
+        "WHOLE_BLOOD"
+      ],
+      "aliases": [
+        "PCV",
+        "HEMATOCRIT"
+      ],
+      "units": [
+        "%",
+        "L/L"
+      ]
+    },
+    {
+      "code": "RBC",
+      "name": "Red Blood Cell Count",
+      "discipline": "HEM",
+      "specimens": [
+        "WHOLE_BLOOD"
+      ],
+      "aliases": [
+        "RBC COUNT"
+      ],
+      "units": [
+        "10^6/uL",
+        "10^12/L"
+      ]
+    },
+    {
+      "code": "WBC",
+      "name": "White Blood Cell Count",
+      "discipline": "HEM",
+      "specimens": [
+        "WHOLE_BLOOD"
+      ],
+      "aliases": [
+        "WBC COUNT",
+        "LEUKOCYTES"
+      ],
+      "units": [
+        "10^3/uL",
+        "10^9/L"
+      ]
+    },
+    {
+      "code": "PLT",
+      "name": "Platelet Count",
+      "discipline": "HEM",
+      "specimens": [
+        "WHOLE_BLOOD"
+      ],
+      "aliases": [
+        "PLATELETS",
+        "PLATELET COUNT"
+      ],
+      "units": [
+        "10^3/uL",
+        "10^9/L"
+      ]
+    },
+    {
+      "code": "MCV",
+      "name": "Mean Corpuscular Volume",
+      "discipline": "HEM",
+      "specimens": [
+        "WHOLE_BLOOD"
+      ],
+      "aliases": [],
+      "units": [
+        "fL"
+      ]
+    },
+    {
+      "code": "MCH",
+      "name": "Mean Corpuscular Hemoglobin",
+      "discipline": "HEM",
+      "specimens": [
+        "WHOLE_BLOOD"
+      ],
+      "aliases": [],
+      "units": [
+        "pg"
+      ]
+    },
+    {
+      "code": "MCHC",
+      "name": "Mean Corpuscular Hemoglobin Concentration",
+      "discipline": "HEM",
+      "specimens": [
+        "WHOLE_BLOOD"
+      ],
+      "aliases": [],
+      "units": [
+        "g/dL",
+        "g/L"
+      ]
+    },
+    {
+      "code": "RDW",
+      "name": "Red Cell Distribution Width",
+      "discipline": "HEM",
+      "specimens": [
+        "WHOLE_BLOOD"
+      ],
+      "aliases": [
+        "RDW-CV"
+      ],
+      "units": [
+        "%"
+      ]
+    },
+    {
+      "code": "PT",
+      "name": "Prothrombin Time",
+      "discipline": "COAG",
+      "specimens": [
+        "CITRATED_PLASMA"
+      ],
+      "aliases": [
+        "PROTHROMBIN TIME"
+      ],
+      "units": [
+        "s",
+        "sec"
+      ]
+    },
+    {
+      "code": "INR",
+      "name": "International Normalized Ratio",
+      "discipline": "COAG",
+      "specimens": [
+        "CITRATED_PLASMA"
+      ],
+      "aliases": [],
+      "units": [
+        "ratio"
+      ]
+    },
+    {
+      "code": "APTT",
+      "name": "Activated Partial Thromboplastin Time",
+      "discipline": "COAG",
+      "specimens": [
+        "CITRATED_PLASMA"
+      ],
+      "aliases": [
+        "PTT",
+        "aPTT"
+      ],
+      "units": [
+        "s",
+        "sec"
+      ]
+    },
+    {
+      "code": "GLU",
+      "name": "Glucose",
+      "discipline": "CHEM",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "GLUCOSE",
+        "BLOOD GLUCOSE"
+      ],
+      "units": [
+        "mg/dL",
+        "mmol/L"
+      ]
+    },
+    {
+      "code": "HBA1C",
+      "name": "Hemoglobin A1c",
+      "discipline": "CHEM",
+      "specimens": [
+        "WHOLE_BLOOD"
+      ],
+      "aliases": [
+        "A1C",
+        "HbA1c"
+      ],
+      "units": [
+        "%",
+        "mmol/mol"
+      ]
+    },
+    {
+      "code": "CREA",
+      "name": "Creatinine",
+      "discipline": "RENAL",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "CREAT",
+        "CREATININE"
+      ],
+      "units": [
+        "mg/dL",
+        "umol/L"
+      ]
+    },
+    {
+      "code": "UREA",
+      "name": "Urea",
+      "discipline": "RENAL",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "BLOOD UREA"
+      ],
+      "units": [
+        "mg/dL",
+        "mmol/L"
+      ]
+    },
+    {
+      "code": "BUN",
+      "name": "Blood Urea Nitrogen",
+      "discipline": "RENAL",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [],
+      "units": [
+        "mg/dL",
+        "mmol/L"
+      ]
+    },
+    {
+      "code": "NA",
+      "name": "Sodium",
+      "discipline": "CHEM",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "SODIUM"
+      ],
+      "units": [
+        "mmol/L",
+        "mEq/L"
+      ]
+    },
+    {
+      "code": "K",
+      "name": "Potassium",
+      "discipline": "CHEM",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "POTASSIUM"
+      ],
+      "units": [
+        "mmol/L",
+        "mEq/L"
+      ]
+    },
+    {
+      "code": "CL",
+      "name": "Chloride",
+      "discipline": "CHEM",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "CHLORIDE"
+      ],
+      "units": [
+        "mmol/L",
+        "mEq/L"
+      ]
+    },
+    {
+      "code": "CA",
+      "name": "Calcium",
+      "discipline": "CHEM",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "CALCIUM"
+      ],
+      "units": [
+        "mg/dL",
+        "mmol/L"
+      ]
+    },
+    {
+      "code": "ALT",
+      "name": "Alanine Aminotransferase",
+      "discipline": "HEP",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "SGPT"
+      ],
+      "units": [
+        "U/L"
+      ]
+    },
+    {
+      "code": "AST",
+      "name": "Aspartate Aminotransferase",
+      "discipline": "HEP",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "SGOT"
+      ],
+      "units": [
+        "U/L"
+      ]
+    },
+    {
+      "code": "ALP",
+      "name": "Alkaline Phosphatase",
+      "discipline": "HEP",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "ALK PHOS"
+      ],
+      "units": [
+        "U/L"
+      ]
+    },
+    {
+      "code": "TBIL",
+      "name": "Total Bilirubin",
+      "discipline": "HEP",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "TOTAL BILIRUBIN",
+        "BILIRUBIN TOTAL"
+      ],
+      "units": [
+        "mg/dL",
+        "umol/L"
+      ]
+    },
+    {
+      "code": "ALB",
+      "name": "Albumin",
+      "discipline": "HEP",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "ALBUMIN"
+      ],
+      "units": [
+        "g/dL",
+        "g/L"
+      ]
+    },
+    {
+      "code": "CRP",
+      "name": "C-Reactive Protein",
+      "discipline": "IMM",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "C REACTIVE PROTEIN"
+      ],
+      "units": [
+        "mg/L",
+        "mg/dL"
+      ]
+    },
+    {
+      "code": "TSH",
+      "name": "Thyroid Stimulating Hormone",
+      "discipline": "ENDO",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "THYROTROPIN"
+      ],
+      "units": [
+        "mIU/L",
+        "uIU/mL"
+      ]
+    },
+    {
+      "code": "FT4",
+      "name": "Free Thyroxine",
+      "discipline": "ENDO",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "FREE T4"
+      ],
+      "units": [
+        "ng/dL",
+        "pmol/L"
+      ]
+    },
+    {
+      "code": "TROPONIN_I",
+      "name": "Cardiac Troponin I",
+      "discipline": "CARD",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "TNI",
+        "TROP I",
+        "TROPONIN I"
+      ],
+      "units": [
+        "ng/L",
+        "ng/mL"
+      ]
+    },
+    {
+      "code": "TROPONIN_T",
+      "name": "Cardiac Troponin T",
+      "discipline": "CARD",
+      "specimens": [
+        "SERUM",
+        "PLASMA"
+      ],
+      "aliases": [
+        "TNT",
+        "TROP T",
+        "TROPONIN T"
+      ],
+      "units": [
+        "ng/L",
+        "ng/mL"
+      ]
+    }
+  ],
+  "conversions": [
+    {
+      "testCode": "HGB",
+      "from": "g/dL",
+      "to": "g/L",
+      "factor": 10
+    },
+    {
+      "testCode": "HGB",
+      "from": "g/L",
+      "to": "g/dL",
+      "factor": 0.1
+    },
+    {
+      "testCode": "GLU",
+      "from": "mg/dL",
+      "to": "mmol/L",
+      "factor": 0.0555
+    },
+    {
+      "testCode": "GLU",
+      "from": "mmol/L",
+      "to": "mg/dL",
+      "factor": 18.018
+    },
+    {
+      "testCode": "CREA",
+      "from": "mg/dL",
+      "to": "umol/L",
+      "factor": 88.4
+    },
+    {
+      "testCode": "CREA",
+      "from": "umol/L",
+      "to": "mg/dL",
+      "factor": 0.01131
+    },
+    {
+      "testCode": "TBIL",
+      "from": "mg/dL",
+      "to": "umol/L",
+      "factor": 17.104
+    },
+    {
+      "testCode": "TBIL",
+      "from": "umol/L",
+      "to": "mg/dL",
+      "factor": 0.05847
+    },
+    {
+      "testCode": "CA",
+      "from": "mg/dL",
+      "to": "mmol/L",
+      "factor": 0.2495
+    },
+    {
+      "testCode": "CA",
+      "from": "mmol/L",
+      "to": "mg/dL",
+      "factor": 4.008
+    }
+  ]
+}

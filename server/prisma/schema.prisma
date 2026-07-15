@@ -1,0 +1,370 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
+
+model Organization {
+  id String @id @default(cuid())
+  code String @unique
+  name String
+  cases Case[]
+  referenceSets ReferenceSet[]
+  createdAt DateTime @default(now())
+}
+model Case {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields:[organizationId],references:[id])
+  externalId String
+  displayName String
+  specimen String?
+  status CaseStatus @default(DRAFT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  results LabResult[]
+  analyses Analysis[]
+  auditEvents AuditEvent[]
+  @@unique([organizationId, externalId])
+}
+model TestDefinition {
+  id String @id @default(cuid())
+  canonicalCode String @unique
+  displayName String
+  discipline String
+  defaultUnit String?
+  aliases TestAlias[]
+  referenceRanges ReferenceRange[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model TestAlias {
+  id String @id @default(cuid())
+  alias String @unique
+  testDefinitionId String
+  testDefinition TestDefinition @relation(fields:[testDefinitionId],references:[id],onDelete:Cascade)
+}
+model ReferenceSet {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields:[organizationId],references:[id])
+  name String
+  version Int @default(1)
+  active Boolean @default(true)
+  ranges ReferenceRange[]
+  createdAt DateTime @default(now())
+  @@unique([organizationId,name,version])
+}
+model ReferenceRange {
+  id String @id @default(cuid())
+  referenceSetId String
+  referenceSet ReferenceSet @relation(fields:[referenceSetId],references:[id],onDelete:Cascade)
+  testDefinitionId String
+  testDefinition TestDefinition @relation(fields:[testDefinitionId],references:[id])
+  low Float?
+  high Float?
+  unit String?
+  method String?
+  instrument String?
+  contextJson Json?
+  criticalLow Float?
+  criticalHigh Float?
+}
+model LabResult {
+  id String @id @default(cuid())
+  caseId String
+  case Case @relation(fields:[caseId],references:[id],onDelete:Cascade)
+  canonicalCode String
+  sourceCode String
+  valueText String
+  numericValue Float?
+  unit String?
+  referenceLow Float?
+  referenceHigh Float?
+  flag ResultFlag @default(UNKNOWN)
+  source String @default("MANUAL")
+  normalizationJson Json?
+  createdAt DateTime @default(now())
+}
+model Analysis {
+  id String @id @default(cuid())
+  caseId String
+  case Case @relation(fields:[caseId],references:[id],onDelete:Cascade)
+  engine String
+  engineVersion String
+  status AnalysisStatus
+  measuredJson Json
+  patternJson Json
+  associationJson Json
+  verifyJson Json
+  safetyJson Json
+  createdAt DateTime @default(now())
+}
+model AuditEvent {
+  id String @id @default(cuid())
+  caseId String?
+  case Case? @relation(fields:[caseId],references:[id],onDelete:SetNull)
+  actor String
+  action String
+  metadata Json?
+  createdAt DateTime @default(now())
+}
+enum CaseStatus { DRAFT READY IN_REVIEW REVIEWED ARCHIVED }
+enum ResultFlag { LOW HIGH CRITICAL_LOW CRITICAL_HIGH NORMAL UNKNOWN }
+enum AnalysisStatus { PENDING COMPLETED FAILED }
+
+model IngestionJob {
+  id String @id @default(cuid())
+  caseId String?
+  case Case? @relation(fields:[caseId],references:[id],onDelete:SetNull)
+  originalName String
+  objectKey String?
+  mimeType String
+  sizeBytes Int
+  sha256 String
+  status IngestionStatus @default(RECEIVED)
+  adapter String?
+  sourceType String?
+  extractionJson Json?
+  queueJobId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  fields ExtractedField[]
+}
+model ExtractedField {
+  id String @id @default(cuid())
+  ingestionJobId String
+  ingestionJob IngestionJob @relation(fields:[ingestionJobId],references:[id],onDelete:Cascade)
+  rowIndex Int
+  sourceTestCode String
+  sourceValue String
+  sourceUnit String?
+  canonicalCode String?
+  confidence Float
+  provenanceJson Json
+  status VerificationStatus @default(PENDING)
+  reviewer String?
+  reviewedAt DateTime?
+  createdAt DateTime @default(now())
+}
+enum IngestionStatus { RECEIVED QUARANTINED EXTRACTED NEEDS_VERIFICATION VERIFIED REJECTED }
+enum VerificationStatus { PENDING ACCEPTED CORRECTED REJECTED }
+
+model OrchestrationRun {
+  id String @id @default(cuid())
+  caseId String
+  case Case @relation(fields:[caseId],references:[id],onDelete:Cascade)
+  provider String
+  model String
+  promptName String
+  promptVersion String
+  status String
+  evidenceJson Json
+  outputJson Json?
+  gateJson Json?
+  createdAt DateTime @default(now())
+}
+
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  displayName String
+  passwordHash String
+  active Boolean @default(true)
+  memberships Membership[]
+  assignments CaseAssignment[]
+  reviews Review[]
+  acknowledgments CriticalAcknowledgment[]
+  locks CaseLock[]
+  createdAt DateTime @default(now())
+}
+model Membership {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  organizationId String
+  organization Organization @relation(fields:[organizationId],references:[id],onDelete:Cascade)
+  role Role
+  createdAt DateTime @default(now())
+  @@unique([userId,organizationId])
+}
+model CaseAssignment {
+  id String @id @default(cuid())
+  caseId String
+  case Case @relation(fields:[caseId],references:[id],onDelete:Cascade)
+  userId String
+  user User @relation(fields:[userId],references:[id])
+  assignedBy String
+  createdAt DateTime @default(now())
+  @@unique([caseId,userId])
+}
+model Review {
+  id String @id @default(cuid())
+  caseId String
+  case Case @relation(fields:[caseId],references:[id],onDelete:Cascade)
+  reviewerId String
+  reviewer User @relation(fields:[reviewerId],references:[id])
+  decision ReviewDecision
+  notes String?
+  sourceOutputJson Json?
+  finalOutputJson Json?
+  diffJson Json?
+  createdAt DateTime @default(now())
+}
+model CaseLock {
+  id String @id @default(cuid())
+  caseId String @unique
+  case Case @relation(fields:[caseId],references:[id],onDelete:Cascade)
+  userId String
+  user User @relation(fields:[userId],references:[id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+model CriticalAcknowledgment {
+  id String @id @default(cuid())
+  caseId String
+  case Case @relation(fields:[caseId],references:[id],onDelete:Cascade)
+  userId String
+  user User @relation(fields:[userId],references:[id])
+  signalKey String
+  note String?
+  acknowledgedAt DateTime @default(now())
+  @@unique([caseId,signalKey])
+}
+enum Role { SYSTEM_ADMIN ORG_ADMIN LAB_SPECIALIST REVIEWER READ_ONLY }
+enum ReviewDecision { APPROVED REJECTED CHANGES_REQUESTED }
+
+model IntegrationSource {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields:[organizationId],references:[id],onDelete:Cascade)
+  code String
+  name String
+  type IntegrationSourceType
+  active Boolean @default(true)
+  configJson Json?
+  mappings AnalyzerMapping[]
+  messages IntegrationMessage[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([organizationId,code])
+}
+model AnalyzerMapping {
+  id String @id @default(cuid())
+  integrationSourceId String
+  integrationSource IntegrationSource @relation(fields:[integrationSourceId],references:[id],onDelete:Cascade)
+  sourceTestCode String
+  canonicalCode String
+  sourceUnit String?
+  canonicalUnit String?
+  active Boolean @default(true)
+  createdAt DateTime @default(now())
+  @@unique([integrationSourceId,sourceTestCode])
+}
+model IntegrationMessage {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields:[organizationId],references:[id],onDelete:Cascade)
+  integrationSourceId String?
+  integrationSource IntegrationSource? @relation(fields:[integrationSourceId],references:[id],onDelete:SetNull)
+  protocol IntegrationProtocol
+  idempotencyKey String
+  payloadHash String
+  status IntegrationMessageStatus @default(RECEIVED)
+  rawMetadataJson Json?
+  parsedJson Json?
+  errorJson Json?
+  receivedAt DateTime @default(now())
+  processedAt DateTime?
+  @@unique([organizationId,idempotencyKey])
+}
+model DeadLetterItem {
+  id String @id @default(cuid())
+  messageKey String
+  reason String
+  payloadJson Json?
+  attempts Int @default(0)
+  resolved Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model ReconciliationItem {
+  id String @id @default(cuid())
+  messageKey String
+  caseExternalId String?
+  reason String
+  contextJson Json?
+  status String @default("OPEN")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+enum IntegrationSourceType { LIS HIS ANALYZER EXTERNAL_LAB FHIR_SERVER }
+enum IntegrationProtocol { HL7_V2 FHIR_R4 JSON CSV }
+enum IntegrationMessageStatus { RECEIVED PARSED MAPPED PROCESSED DUPLICATE DEAD_LETTER RECONCILIATION_REQUIRED }
+
+model KnowledgeChangeProposal {
+  id String @id @default(cuid())
+  organizationId String?
+  type String
+  targetCode String
+  payloadJson Json
+  reason String
+  proposedBy String
+  status String @default("PROPOSED")
+  reviewsJson Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model GovernedReferenceSet {
+  id String @id @default(cuid())
+  organizationId String?
+  testCode String
+  unit String
+  lower Float
+  upper Float
+  contextJson Json
+  version String
+  reviewStatus String @default("DRAFT")
+  sourceCitation String?
+  approvedBy String?
+  effectiveFrom DateTime?
+  effectiveTo DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model CriticalValuePolicy {
+  id String @id @default(cuid())
+  organizationId String?
+  testCode String
+  unit String
+  low Float?
+  high Float?
+  severity String @default("CRITICAL")
+  active Boolean @default(true)
+  version String
+  approvedBy String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AuthSession {
+  id String @id @default(cuid())
+  userId String
+  organizationId String
+  tokenHash String
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+  lastSeenAt DateTime?
+  @@index([userId])
+  @@index([organizationId])
+}
+model SecurityEvent {
+  id String @id @default(cuid())
+  organizationId String?
+  userId String?
+  eventType String
+  severity String
+  requestId String?
+  ipHash String?
+  metadataJson Json?
+  createdAt DateTime @default(now())
+  @@index([organizationId, createdAt])
+}

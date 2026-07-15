@@ -1,0 +1,29 @@
+AZEZ LAB AI V12 — MEDICAL DOCUMENT INTELLIGENCE
+
+IMPLEMENTED
+- Tesseract.js image OCR adapter
+- OCR word confidence capture
+- OCR word bounding boxes
+- Word-level provenance IDs
+- Laboratory text line parser
+- Test registry resolution from OCR text
+- Value extraction
+- Unit extraction
+- Reference-range extraction for compact ranges such as 12-16
+- Flag extraction: H/L/HH/LL/HIGH/LOW
+- Field confidence
+- Verification queue routing
+- PDF embedded-text extraction
+- Scanned-PDF detection
+- Explicit scanned-PDF page-rendering/OCR boundary
+- Object storage before document extraction
+- Document Intelligence API
+- Product OS routes PDF/JPEG/PNG to Document Intelligence
+- OCR confidence and document mode shown in Product OS
+
+IMPORTANT BOUNDARY
+V12 performs real OCR on image reports and text extraction on text-bearing PDFs.
+Scanned multi-page PDFs are detected but are NOT falsely claimed as fully OCR processed.
+A PDF page-rendering worker is still required for robust scanned-PDF OCR and page-specific bounding boxes.
+
+OCR output is not automatically a confirmed measured fact. Low-confidence/incomplete fields are routed to verification.

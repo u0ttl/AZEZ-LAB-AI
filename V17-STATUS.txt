@@ -1,0 +1,36 @@
+AZEZ LAB AI V17 — DEPLOYMENT CANDIDATE
+
+FINAL ENGINEERING RELEASE PACKAGE CREATED.
+
+ADDED IN V17
+- One-click Windows launcher finalized
+- Docker availability and daemon checks
+- Automatic local .env creation
+- Dependency bootstrap
+- Prisma client generation
+- PostgreSQL/Redis startup
+- Database schema preparation
+- Mandatory engineering release validation before durable auto-start
+- Core + Worker + Product OS startup
+- Automatic browser launch
+- Explicit direct local demo fallback
+- Operational status endpoint
+- Production preflight runner
+- Storage writeability check
+- PostgreSQL/Redis preflight checks
+- AI provider configuration preflight
+- Secret validation preflight
+- PostgreSQL backup launcher
+- Explicit-confirmation restore launcher
+- Final release manifest
+- Final engineering/clinical boundary documentation
+
+KNOWN REMAINING DEPLOYMENT-SPECIFIC WORK
+- Robust scanned multi-page PDF page rendering/OCR
+- External malware scanner
+- Production MFA/identity provider
+- Full penetration testing
+- Representative clinical validation datasets and protocols
+- Institution-specific reference intervals and critical-value policies
+- Site-specific LIS/HIS integration validation
+- Privacy/regulatory assessment for the intended market

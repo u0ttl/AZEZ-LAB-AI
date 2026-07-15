@@ -1,0 +1,17 @@
+{
+  "release": "AZEZ-LAB-AI-V16",
+  "status": "ENGINEERING_VALIDATION",
+  "requiredSuites": [
+    "document-parser",
+    "knowledge",
+    "tenant-isolation",
+    "ai-guard",
+    "validation-metrics"
+  ],
+  "clinicalClaimsAllowed": false,
+  "notes": [
+    "Engineering tests do not establish clinical efficacy.",
+    "OCR accuracy must be measured on authorized representative datasets.",
+    "Reference intervals and critical policies require laboratory governance."
+  ]
+}

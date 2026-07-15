@@ -1,0 +1,2 @@
+ALTER TABLE "IngestionJob" ADD COLUMN IF NOT EXISTS "objectKey" TEXT;
+ALTER TABLE "IngestionJob" ADD COLUMN IF NOT EXISTS "queueJobId" TEXT;

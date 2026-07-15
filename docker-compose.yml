@@ -1,0 +1,81 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: azez_lab_ai
+      POSTGRES_USER: azez
+      POSTGRES_PASSWORD: azez_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - azez_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U azez -d azez_lab_ai"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server","--appendonly","yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - azez_redis:/data
+    healthcheck:
+      test: ["CMD","redis-cli","ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  core:
+    profiles: ["app"]
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+      PORT: 8787
+      DATABASE_URL: postgresql://azez:azez_dev_password@postgres:5432/azez_lab_ai?schema=public
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET}
+      REQUIRE_DURABLE_INFRA: "true"
+      STORAGE_ROOT: /data/objects
+      AI_PROVIDER: ${AI_PROVIDER:-mock}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-5.2}
+      AI_TIMEOUT_MS: ${AI_TIMEOUT_MS:-45000}
+    ports:
+      - "8787:8787"
+    volumes:
+      - azez_objects:/data/objects
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    profiles: ["app"]
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://azez:azez_dev_password@postgres:5432/azez_lab_ai?schema=public
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET}
+      REQUIRE_DURABLE_INFRA: "true"
+      STORAGE_ROOT: /data/objects
+    volumes:
+      - azez_objects:/data/objects
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  azez_postgres:
+  azez_redis:
+  azez_objects:

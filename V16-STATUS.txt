@@ -1,0 +1,20 @@
+AZEZ LAB AI V16 — VALIDATION & AUTOMATED TESTING
+
+IMPLEMENTED
+- Release validation runner
+- Five required engineering validation suites
+- Extraction precision/recall/F1 metrics
+- Verification-rate metrics
+- AI rejection-rate metrics
+- Validation metrics API
+- Release validation manifest
+- Core test aggregate command
+- Explicit separation between engineering validation and clinical validation
+
+COMMANDS
+npm run test:core
+npm run validate:release
+
+IMPORTANT
+Passing V16 engineering tests does NOT establish clinical efficacy, diagnostic accuracy, regulatory approval, or fitness for unsupervised patient care.
+Representative authorized datasets and professional clinical validation remain required.

@@ -1,0 +1,10 @@
+import { extractionMetrics,verificationMetrics,aiRunMetrics } from "../../metrics/validationMetrics.js";
+const e=[{canonicalCode:"HGB",numericValue:9.8},{canonicalCode:"MCV",numericValue:68}];
+const a=[{canonicalCode:"HGB",numericValue:9.8},{canonicalCode:"MCV",numericValue:68},{canonicalCode:"RDW",numericValue:18.2}];
+const m=extractionMetrics(e,a);
+if(m.truePositive!==2||m.falsePositive!==1||m.falseNegative!==0)throw new Error("EXTRACTION_METRICS_FAILED");
+const v=verificationMetrics([{verificationStatus:"ACCEPTED"},{verificationStatus:"PENDING"}]);
+if(v.verificationRate!==0.5)throw new Error("VERIFICATION_METRICS_FAILED");
+const ai=aiRunMetrics([{status:"PASSED"},{status:"REJECTED"}]);
+if(ai.rejectionRate!==0.5)throw new Error("AI_METRICS_FAILED");
+console.log("VALIDATION METRICS SELFTEST PASSED");

@@ -1,0 +1,33 @@
+AZEZ LAB AI V11 — PRODUCTION CORE
+
+IMPLEMENTED
+- PostgreSQL production connection validation
+- Redis connection validation
+- /api/ready readiness probe
+- BullMQ queue foundation
+- Separate worker service
+- Durable object storage foundation
+- SHA-256 content-addressed object keys
+- Durable ingestion repository when PostgreSQL is available
+- Queue job IDs on ingestion jobs
+- Docker Compose for PostgreSQL and Redis
+- App/worker Dockerfiles
+- Production environment validation
+- Helmet security headers
+- API rate limiting
+- Structured Pino logging
+- Request IDs
+- Sensitive log redaction
+- Prisma production scripts
+- Migration foundation
+- One-click Windows launcher with durable mode and explicit demo fallback
+
+STILL NOT PRODUCTION CLINICAL USE
+- Real OCR/table extraction adapter
+- Real external AI provider adapter
+- Production identity/MFA
+- Institution-specific HL7/FHIR conformance
+- Full tenant-isolation security tests
+- Malware scanning
+- Cloud/KMS-backed secrets and encryption design
+- Clinical validation and regulatory/privacy assessment

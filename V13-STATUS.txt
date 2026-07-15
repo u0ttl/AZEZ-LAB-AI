@@ -1,0 +1,28 @@
+AZEZ LAB AI V13 — REAL AI PROVIDER FOUNDATION
+
+IMPLEMENTED
+- OpenAI provider adapter using the Responses API
+- Strict JSON Schema structured output
+- Zod output validation
+- Evidence ID allow-list guard
+- Safety language guard
+- Prompt version tracking
+- Input SHA-256 digest
+- Provider/model/response metadata
+- Usage metadata capture when returned
+- Timeout and retry configuration
+- Audit events for completed and rejected AI analyses
+- AI provider status endpoint
+- Governed real-AI analysis endpoint
+- Product OS provider status card and RUN REAL AI control
+- Mock remains the default; real provider is opt-in through environment configuration
+
+CONFIGURE
+AI_PROVIDER=openai
+OPENAI_API_KEY=your_key
+OPENAI_MODEL=gpt-5.2
+
+IMPORTANT
+Do not hard-code API keys into source files.
+Do not submit identifiable patient data to an external AI provider until the deployment has an appropriate privacy, security, contractual, and regulatory basis.
+The AI output remains decision support and must pass evidence/safety guards and professional review.
